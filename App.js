@@ -1,21 +1,67 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
+import * as React from 'react';
+import { Button, View,AppRegistry } from 'react-native';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import Home from './Telas/Home';
+//import AddPhoto from './Telas/AddPhoto';
+//import Profile from './Telas/Profile';
+
+const Tab = createBottomTabNavigator();
+const HomeStack = createStackNavigator();
+
+
+function A() {
+  return <View />;
+}
+
+function HomeStackScreen() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <HomeStack.Navigator>
+      <HomeStack.Screen
+        name="Doggram"
+        component={Home}
+        options={{ tabBarLabel: 'Home!' }}
+      />
+    </HomeStack.Navigator>
+  );
+}
+function PhotoStarkScreen() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen
+        name="Doggram"
+        component={Home}
+        options={{ tabBarLabel: 'Home!' }}
+      />
+    </HomeStack.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+function ProfileStarkScreen() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen
+        name="Doggram"
+        component={Home}
+        options={{ tabBarLabel: 'Home!' }}
+      />
+    </HomeStack.Navigator>
+  );
+}
+
+
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home"  component={HomeStackScreen}  />
+      <Tab.Screen name="Photo" component={PhotoStarkScreen}  />
+        <Tab.Screen name="Profile" component={ProfileStarkScreen}  />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
