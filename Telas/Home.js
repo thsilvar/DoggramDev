@@ -9,11 +9,9 @@ import {
 } from "react-native";
 import CardQuote from "../components/card";
 import { useList } from "react-firebase-hooks/database";
-<<<<<<< Updated upstream
-import databaseFactory from "../factories/databasefactory.js";
-=======
+
 import databaseFactory from "../factories/databaseFactory";
->>>>>>> Stashed changes
+
 /*
 const list = [
     { id: 1, author: 'Platão', profileImg: 'https://i2.wp.com/filosofiapop.com.br/wp-content/uploads/2015/06/plato-1.jpg', image:'https://blog.emania.com.br/wp-content/uploads/2019/01/como-tirar-foto-de-cachorro-vinculo-1024x598.jpg' },
