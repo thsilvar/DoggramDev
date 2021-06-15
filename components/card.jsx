@@ -25,7 +25,7 @@ const CardQuote = ({ text, author, profileImg, image }) => {
             />
             <Card.Content style={styles.content}>
                 <Paragraph style={styles.quote}>{text}</Paragraph>
-                <Card.Cover   style={styles.image}source={{uri:image}}/>
+                <Card.Cover  source={{uri:image}}/>
             </Card.Content>
             <Card.Actions style={styles.actions}>
                 <Button
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         padding: 8,
-        lineHeight: '120%',
+        
     },
     title: {
         backgroundColor: '#fff'

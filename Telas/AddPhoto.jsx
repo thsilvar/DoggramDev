@@ -1,32 +1,57 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View ,Dimensions} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import * as Sharing from 'expo-sharing'; 
 
 
 
 const AddPhoto = ({}) =>{
 
+  const [selectedImage, setSelectedImage] = React.useState(null);
+
   let openImagePickerAsync = async () => {
-    let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
+    let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
     if (permissionResult.granted === false) {
-      alert('Permission to access camera roll is required!');
+      alert("Permission to access camera roll is required!");
       return;
     }
 
     let pickerResult = await ImagePicker.launchImageLibraryAsync();
-    console.log(pickerResult);
+    if (pickerResult.cancelled === true) {
+      return;
+    }
+    setSelectedImage({ localUri: pickerResult.uri });
   };
+
+  let openShareDialogAsync = async () => {
+    if (!(await Sharing.isAvailableAsync())) {
+      alert(`Uh oh, sharing isn't available on your platform`);
+      return;
+    }
+
+    await Sharing.shareAsync(selectedImage.localUri);
+  }; 
+  if (selectedImage !== null) {
+    return (
+      <View style={styles.container}>
+        <Image source={{ uri: selectedImage.localUri }} style={styles.imagemCarregada} />
+        <TouchableOpacity onPress={openShareDialogAsync} style={styles.button}>
+          <Text style={styles.buttonText}>Share this photo</Text>
+        </TouchableOpacity>
+        </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
-      <Image source={{ uri: 'https://www.fotoefeitos.com/efectos/grandes/fotomontaje-perro-papel.jpg' }} style={styles.image} />
+       <Image source={{ uri: 'https://www.fotoefeitos.com/efectos/grandes/fotomontaje-perro-papel.jpg' }} style={styles.image} />
       <Text style={styles.instructions}>
-      Para compartilhar uma foto do Doginho pelo seu celular com um amigo, basta pressionar o botão abaixo!
+        To share a photo from your phone with a friend, just press the button below!
       </Text>
 
       <TouchableOpacity onPress={openImagePickerAsync} style={styles.button}>
-        <Text style={styles.buttonText}>Escolha uma foto</Text>
+        <Text style={styles.buttonText}>Pick a photo</Text>
       </TouchableOpacity>
     </View>
   );
@@ -40,8 +65,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   image: {
-    width:Dimensions.get('window').width,
-    height:Dimensions.get('window').width ,
+    width: 300,
+    height: 300,
     resizeMode:'contain'
   },
   instructions: {
@@ -59,7 +84,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#fff',
   },
+  imagemCarregada: {
+    width: 300,
+    height: 300,
+    resizeMode: 'contain',
+  },
 });
 
 export default AddPhoto;
+
 
