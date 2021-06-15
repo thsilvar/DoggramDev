@@ -1,98 +1,65 @@
+import React from 'react';
+import { Image, StyleSheet, Text, TouchableOpacity, View ,Dimensions} from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
 
-import React, { Component, useState } from "react";
-import {
-    StyleSheet,
-    Text,
-    View,
-    TouchableOpacity,
-    TextInput,
-    Image,
-    Dimensions,
-    Platform,
-    ScrollView,
-    Alert,
-} from "react-native";
-import { ImagePicker, showImagePicker } from "react-native-image-picker";
 
-class AddPhoto extends Component {
-    state = {
-        image: null,
-        comment: "",
-    };
 
-    pickImage = () => {
-        ImagePicker.showImagePicker(
-            {
-                title: "Escolha a imagem",
-                maxHeight: 600,
-                maxWidth: 800,
-            },
-            (res) => {
-                if (!res.didCancel) {
-                    this.setState({ image: { uri: res.uri, base64: res.data } });
-                }
-            }
-        );
-    };
-    save = async () => {
-        Alert.alert("Imagem Adicionada!", this.state.comment);
-    };
+const AddPhoto = ({}) =>{
 
-    render() {
-        return (
-            <ScrollView>
-                <View style={styles.container}>
-                    <Text style={styles.container}>Compartilhe uma imagem</Text>
-                    <View style={styles.imageContainer}>
-                        <Image source={this.state.image} style={styles.image} />
-                    </View>
-                    <TouchableOpacity onPress={this.pickImage} style={styles.buttom}>
-                        <Text style={styles.buttomText}>Escolha a foto</Text>
-                    </TouchableOpacity>
-                    <TextInput
-                        placeholder="Algum comentatrio para a foto?"
-                        style={styles.input}
-                        value={this.comment}
-                        onChangeText={(comment) => this.setState({ comment })}
-                    />
-                    <TouchableOpacity onPress={this.save} style={styles.buttom}>
-                        <Text style={styles.buttomText}>Salvar</Text>
-                    </TouchableOpacity>
-                </View>
-            </ScrollView>
-        );
+  let openImagePickerAsync = async () => {
+    let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
+
+    if (permissionResult.granted === false) {
+      alert('Permission to access camera roll is required!');
+      return;
     }
+
+    let pickerResult = await ImagePicker.launchImageLibraryAsync();
+    console.log(pickerResult);
+  };
+
+  return (
+    <View style={styles.container}>
+      <Image source={{ uri: 'https://www.fotoefeitos.com/efectos/grandes/fotomontaje-perro-papel.jpg' }} style={styles.image} />
+      <Text style={styles.instructions}>
+      Para compartilhar uma foto do Doginho pelo seu celular com um amigo, basta pressionar o botão abaixo!
+      </Text>
+
+      <TouchableOpacity onPress={openImagePickerAsync} style={styles.button}>
+        <Text style={styles.buttonText}>Escolha uma foto</Text>
+      </TouchableOpacity>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-    },
-    title: {
-        fontSize: 20,
-        marginTop: Platform.OS === "ios" ? 30 : 10,
-        fontWeight: "bold",
-    },
-
-    image: {
-        width: Dimensions.get("window"),
-        height: Dimensions.get("window") * 3 / 4,
-        resizeMode: 'center',
-    },
-    buttom: {
-        marginTop: 30,
-        padding: 10,
-        backgroundColor: "#4286f4"
-    },
-    buttomText: {
-        fontSize: 20,
-        color: '#FFF',
-    },
-    input: {
-        marginTop: 20,
-        width: "90%",
-    },
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  image: {
+    width:Dimensions.get('window').width,
+    height:Dimensions.get('window').width ,
+    resizeMode:'contain'
+  },
+  instructions: {
+    color: '#888',
+    fontSize: 18,
+    marginHorizontal: 15,
+    marginBottom: 10,
+  },
+  button: {
+    backgroundColor: 'blue',
+    padding: 20,
+    borderRadius: 5,
+  },
+  buttonText: {
+    fontSize: 20,
+    color: '#fff',
+  },
 });
 
 export default AddPhoto;
+
