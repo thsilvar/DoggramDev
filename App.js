@@ -6,8 +6,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from './Telas/Home';
-//import AddPhoto from './Telas/AddPhoto';
-//import Profile from './Telas/Profile';
+import AddPhoto from './Telas/AddPhoto';
+import Profile from './Telas/Profile';
 
 const Tab = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
@@ -33,7 +33,7 @@ function PhotoStarkScreen() {
     <HomeStack.Navigator>
       <HomeStack.Screen
         name="Doggram"
-        component={Home}
+        component={AddPhoto}
         options={{ tabBarLabel: 'Home!' }}
       />
     </HomeStack.Navigator>
@@ -45,7 +45,7 @@ function ProfileStarkScreen() {
     <HomeStack.Navigator>
       <HomeStack.Screen
         name="Doggram"
-        component={Home}
+        component={Profile}
         options={{ tabBarLabel: 'Home!' }}
       />
     </HomeStack.Navigator>
