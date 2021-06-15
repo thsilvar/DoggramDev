@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Vibration, Platform , Image} from "react-native";
 import { Card, Paragraph, Button, Avatar } from 'react-native-paper';
 
-const CardQuote = ({ text, author, profileImg }) => {
+const CardQuote = ({ text, author, profileImg, image }) => {
   
    
     const[likeButton, setLikebutton] = useState("heart-outline");
@@ -25,7 +25,7 @@ const CardQuote = ({ text, author, profileImg }) => {
             />
             <Card.Content style={styles.content}>
                 <Paragraph style={styles.quote}>{text}</Paragraph>
-                <Card.Cover   style={styles.image}source={{uri:'https://www.petz.com.br/blog/wp-content/uploads/2020/07/heterocromia-cachorro.jpg'}}/>
+                <Card.Cover   style={styles.image}source={{uri:image}}/>
             </Card.Content>
             <Card.Actions style={styles.actions}>
                 <Button
