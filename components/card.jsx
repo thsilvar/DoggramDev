@@ -40,6 +40,7 @@ const CardQuote = ({ text, author, profileImg, image }) => {
                     onPress={handleLike}
                 />
             </Card.Actions>
+            
         </Card>
   );
 };
