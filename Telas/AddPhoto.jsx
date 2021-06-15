@@ -13,7 +13,7 @@ const AddPhoto = ({}) =>{
     let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
     if (permissionResult.granted === false) {
-      alert("Permission to access camera roll is required!");
+      alert("É necessária permissão para acessar o rolo da câmera!");
       return;
     }
 
@@ -26,7 +26,7 @@ const AddPhoto = ({}) =>{
 
   let openShareDialogAsync = async () => {
     if (!(await Sharing.isAvailableAsync())) {
-      alert(`Uh oh, sharing isn't available on your platform`);
+      alert(`Opa, o compartilhamento não está disponível em sua plataforma`);
       return;
     }
 
@@ -47,11 +47,11 @@ const AddPhoto = ({}) =>{
     <View style={styles.container}>
        <Image source={{ uri: 'https://www.fotoefeitos.com/efectos/grandes/fotomontaje-perro-papel.jpg' }} style={styles.image} />
       <Text style={styles.instructions}>
-        To share a photo from your phone with a friend, just press the button below!
+      Para compartilhar uma foto do seu Doginho pelo celular para um amigo, basta pressionar o botão abaixo!
       </Text>
 
       <TouchableOpacity onPress={openImagePickerAsync} style={styles.button}>
-        <Text style={styles.buttonText}>Pick a photo</Text>
+        <Text style={styles.buttonText}>Escolha uma foto</Text>
       </TouchableOpacity>
     </View>
   );
