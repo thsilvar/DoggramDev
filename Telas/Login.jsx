@@ -49,7 +49,7 @@ class AddPhoto extends Component {
                         <Text style={styles.buttomText}>Escolha a foto</Text>
                     </TouchableOpacity>
                     <TextInput
-                        placeholder="Algum comentatrio para a foto?"
+                        placeholder="Algum comentário para a foto?"
                         style={styles.input}
                         value={this.comment}
                         onChangeText={(comment) => this.setState({ comment })}
