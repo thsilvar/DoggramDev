@@ -64,6 +64,11 @@ const styles = StyleSheet.create({
     },
     title: {
         backgroundColor: '#fff'
+    },
+    image: {
+        width:Dimensions.get('window').width,
+        height:Dimensions.get('window').width * 3/4,
+        resizeMode:'contain'
     }
 })
 
