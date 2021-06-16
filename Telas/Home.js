@@ -10,7 +10,7 @@ import {
 import CardQuote from "../components/card";
 import { useList } from "react-firebase-hooks/database";
 
-import databaseFactory from "../factories/databasefactory.js";
+import databaseFactory from "../factories/databaseFactory";
 
 /*
 const list = [
