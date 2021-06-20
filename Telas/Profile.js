@@ -1,61 +1,53 @@
-import React, {Component} from 'react';
-import{
-    View,
-    Text,
-    StyleSheet,
-    TouchableOpacity
-} from 'react-native';
-import {Gravatar} from 'react-native-gravatar';
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  FlatList,
+  StatusBar,
+  View,
+} from "react-native";
+import CardQuote from "../components/card";
+import { useList } from "react-firebase-hooks/database";
 
-class Profile extends Component {
-    logout =() => {
-        
-    }
-    render(){
-        const options = {email:'fulanodetal@gmail.com', secure:true}
-        return(
-            <View style={styles.container}>
-                <Gravatar options={options} style={styles.avatar}/>
-                <Text style={styles.nickname}>Fulano de Tal</Text>
-                <Text style={styles.email}>fulanodetal@gmail.com</Text>
-                <TouchableOpacity onPress={this.logout} style={styles.buttom}>
-            <Text style={styles.buttomText}>Sair</Text>
-          </TouchableOpacity>
-            </View>
-        )
-    }
+import databaseFactory from "../factories/databaseFactory";
+
+
+
+const Profile = () =>{
+  const [cards, loading, erro] = useList(
+    databaseFactory.createDatabaseService("firebase")
+  );
+
+    return(
+      console.log(cards),
+        <SafeAreaView style={styles.container}>
+      <StatusBar
+        animated={true}
+        backgroundColor={"#fff"}
+      />
+      <FlatList
+        data={cards}
+        keyExtractor={item => item.id}
+        renderItem={({ item }) =>
+          <CardQuote 
+          author={item.val().author}
+            profileImg={item.val().profileImg}
+            image={item.val().image} />
+        }
+      >
+      </FlatList>
+    </SafeAreaView>
+    )
 }
 
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: "center",
-    },
-    imageContainer: {
-      width: 150,
-      height: 150,
-      borderRadius:75,
-      marginTop: 10,
-    },
-    nickname: {
-      marginTop:30,
-      fontSize:30,
-      fontWeight:'bold'
-    },
-    email: {
-        marginTop:20,
-        fontSize:25,
-    },
-    buttom: {
-        marginTop:20,
-        padding:10,
-        backgroundColor:'#4286f4',
-    },
-    buttomText: {
-        fontSize:25,
-        backgroundColor:'#FFF',
+      backgroundColor: '#fff',
+      //alignItems: "center",
+      //justifyContent: "center",
     },
   });
-  
-  export default Profile;
-  
+
+export default Profile;

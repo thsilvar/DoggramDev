@@ -8,6 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Home from './Telas/Home';
 import AddPhoto from './Telas/AddPhoto';
 import Profile from './Telas/Profile';
+import Login from './Telas/Login';
 
 const Tab = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
@@ -45,7 +46,7 @@ function ProfileStarkScreen() {
     <HomeStack.Navigator>
       <HomeStack.Screen
         name="Doggram"
-        component={Profile}
+        component={Login}
         options={{ tabBarLabel: 'Home!' }}
       />
     </HomeStack.Navigator>
