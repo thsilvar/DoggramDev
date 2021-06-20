@@ -1,17 +1,15 @@
-import React, { Component, useState } from "react";
+import React from "react";
 import {
     View,
     Button
 } from "react-native";
-import { useEffect } from "react";
-import { auth,singInWithGoogle } from "../factories/authFirebase";
-import Home from "./Home"
+import {singInWithGoogle } from "../factories/authFirebase";
 
-const Login = ({}) => {
+const Login = ({navigation}) => {
 const handleLogin = () =>{
     singInWithGoogle()
         .then(result =>{
-            {{Home}}
+            navigation.navigate('Home');
         })
 }
  return(

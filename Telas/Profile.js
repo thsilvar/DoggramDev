@@ -12,8 +12,6 @@ import { useList } from "react-firebase-hooks/database";
 
 import databaseFactory from "../factories/databaseFactory";
 
-
-
 const Profile = () =>{
   const [cards, loading, erro] = useList(
     databaseFactory.createDatabaseService("firebase")
@@ -45,8 +43,6 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#fff',
-      //alignItems: "center",
-      //justifyContent: "center",
     },
   });
 
